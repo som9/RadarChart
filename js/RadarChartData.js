@@ -33,6 +33,18 @@ var radarData={
                 {
                     "label": "Centralized Network Health Monitoring"
                 },
+                                {
+                    "label": "Centralized Signature Updating"
+                },
+                {
+                    "label": "Active Firewall"
+                },
+                {
+                    "label": "Centralized Access & Firewall"
+                },
+                {
+                    "label": "Centralized Network Health Monitoring"
+                },
 
             ]
         }
