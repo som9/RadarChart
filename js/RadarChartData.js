@@ -33,12 +33,7 @@ var radarData={
                 {
                     "label": "Centralized Network Health Monitoring"
                 },
-                {
-                    "label": "Cost"
-                },
-                {
-                    "label": "Technical Support"
-                }
+
             ]
         }
     ],

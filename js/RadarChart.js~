@@ -4,7 +4,7 @@ function RadarChart()
     var svgNS="http://www.w3.org/2000/svg";
     //Axis parameters
     var xOrigin=50,yOrigin=250,xUpperLimit,yUpperLimit,xLowerLimit,ylowerLimit,xDifference,yDifference;
-    var xDivisions,yDivisons,xAxisLength=800,yAxisLength=400,xLabel=[],yLabel,axisData,noOfComponents,noOfproperties;
+    var xDivisions,yDivisons,xAxisLength=800,yAxisLength=400,xLabel=[],yLabel,axisData,noOfComponents;
     var scalingFactor=30;
     var axisCordinates=[];
     //Data parameters
@@ -51,27 +51,24 @@ function RadarChart()
     }
     var generateAxisParameters=function()
      {
-        var myData=chartData.dataset[0];
-        noOfComponents=chartData.dataset.length;
+        
         console.log(chartData);
         axisData=chartData.categories[0].category; 
         console.log("Labels are of the form"+axisData[0].label);
-        noOfproperties=axisData.length;
-        console.log("/////////////////////*******No of Properties*******////////////////"+axisData.length);
         for(var i=0;i<axisData.length;i++)
         {
          xLabel[i]=axisData[i].label;   
         }
         //Generating Axis Cordinates
-        var angle=360/noOfproperties;
+        var angle=360/7;
         var rad=2;
         var axisRad;
        
-        for(var i=0;i<2*noOfComponents;i++)
+        for(var i=0;i<4;i++)
          {
-             var axisString="";
-             angle=Number(360/noOfproperties);
-           for(var j=0;j<noOfproperties;j++)
+              var axisString="";
+             angle=Number(360/7);
+           for(var j=0;j<7;j++)
            {
             axisRad=Number(rad)/2*scalingFactor;
 
@@ -81,7 +78,7 @@ function RadarChart()
             axisString+=xVal+","+yVal+" ";
             
             
-            angle+=360/noOfproperties;  
+            angle+=360/7;  
             }
             axisCordinates[i]=axisString;
             console.log(axisCordinates[i]);
@@ -97,7 +94,7 @@ function RadarChart()
         noOfComponents=chartData.dataset.length;
         //Radar radius=charData.axisValue
         var seriesName,radarColor,radarAlpha,radarData;
-        console.log(noOfComponents+" ************************* ");
+        console.log(noOfComponents+"   "+chartData.dataset[0].data[0].value);
         var x=0;
          var arr=[];
         for(var i=0;i<noOfComponents;i++)
@@ -119,11 +116,11 @@ function RadarChart()
         radarCenter={x:xAxisLength/2, y:yAxisLength/2};
 
         radarRadius=Number(yUpperLimit-ylowerLimit)*scalingFactor;
-        var theta=Number(360/noOfproperties);
+        var theta=Number(360/7);
         console.log("Center is at"+radarCenter.x+","+radarCenter.y+" Radar Radius is"+radarRadius);
 
         //x=a+rcos0; y=b+rsin0;
-        for(var i=0;i<noOfproperties;i++)
+        for(var i=0;i<7;i++)
          {
         //a=xOrigin,b=yOrigin,r=radarRadius,0=360/no of sides;
             
@@ -131,14 +128,14 @@ function RadarChart()
             var yVal=yAxisLength/2+radarRadius*Math.sin(theta*radian);
             radarCoordinates[i]={x:xVal,y:yVal};   
             console.log(radarCoordinates[i].x+"  "+radarCoordinates[i].y);      
-            theta+=360/noOfproperties;  
+            theta+=360/7;  
             console.log("theta value:"+theta);
          }
         
          var radarRadius2=radarRadius;
          for(var i=0;i<noOfComponents;i++)
          {
-             theta=Number(360/noOfproperties);
+             theta=Number(360/7);
            for(var j=0;j<chartData.dataset[0].data.length;j++)
            {
             radarRadius2=Number(chartData.dataset[i].data[j].value)/2*scalingFactor;
@@ -149,7 +146,7 @@ function RadarChart()
             console.log("New Radius is"+radarRadius2+"  "+xVal,yVal,noOfComponents,coObj);
            innerRadarCoordinates[i][j]=coObj;
            console.log("Co-Ordinates are"+innerRadarCoordinates[i][j].x);
-           theta+=360/noOfproperties;  
+           theta+=360/7;  
             }
             
          }
